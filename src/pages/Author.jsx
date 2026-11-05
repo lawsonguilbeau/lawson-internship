@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
@@ -11,7 +11,7 @@ const Author = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(0);
 
-  async function fetchAuthorProfile() {
+  const fetchAuthorProfile = useCallback(async () => {
     try {
       const { data } = await axios.get(
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
@@ -23,12 +23,12 @@ const Author = () => {
       console.error("Error fetching author profile:", error);
       setLoading(false);
     }
-  }
+  }, [authorId]);
 
   useEffect(() => {
     fetchAuthorProfile();
     window.scrollTo(0, 0);
-  }, [authorId]);
+  }, [fetchAuthorProfile]);
 
   const handleFollowClick = () => {
     if (isFollowing) {

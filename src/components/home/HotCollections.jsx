@@ -189,14 +189,21 @@ const HotCollections = () => {
                       </Link>
                     </div>
                     <div className="nft_coll_pp">
-                      <Link to={`/author/${collection.authorId}`}>
-                        <img
-                          className="lazy pp-coll"
-                          src={collection.authorImage}
-                          alt=""
-                        />
-                      </Link>
-                      <i className="fa fa-check"></i>
+<div className="nft_coll_pp">
+  <Link
+    to={`/author/${collection.authorId}`}
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title={`Creator: ${collection.authorId}`}
+  >
+    <img
+      className="lazy pp-coll"
+      src={collection.authorImage}
+      alt=""
+    />
+    <i className="fa fa-check"></i>
+  </Link>
+</div>
                     </div>
                     <div className="nft_coll_info">
                       <Link to="/explore">
